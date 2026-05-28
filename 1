@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任乔洛的homepage</title>
+    <style>
+        /* 基础页面重置与居中布局 */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* 撑满整个屏幕高度 */
+            margin: 0;
+            background-color: #f9f9f9; /* 浅灰色背景，显得干净 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* 标题样式：小字 */
+        .homepage-title {
+            font-size: 14px; /* 较小的字号 */
+            color: #666; /* 深灰色字体 */
+            margin-bottom: 20px; /* 和下方按钮保持距离 */
+            letter-spacing: 1px;
+        }
+
+        /* 按钮样式 */
+        .visit-btn {
+            padding: 8px 24px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #333; /* 黑色/深灰色按钮 */
+            border: none;
+            border-radius: 6px; /* 圆角边框 */
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        /* 鼠标悬浮在按钮上的效果 */
+        .visit-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="homepage-title">任乔洛的homepage</div>
+
+    <button class="visit-btn" onclick="showPopup()">访问</button>
+
+    <script>
+        function showPopup() {
+            // 弹出浏览器原生提示框
+            alert("未开放");
+        }
+    </script>
+
+</body>
+</html>
