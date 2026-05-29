@@ -3,58 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>任乔洛的homepage</title>
+    <title>任乔洛 | 艺术总监</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        /* 基础页面重置与居中布局 */
-        body {
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #f8f9fa; /* 浅色明亮背景 */
+            color: #1a1a1a; /* 深灰色主文本 */
+            font-family: 'Noto Serif SC', serif;
+            overflow: hidden;
+        }
+
+        /* 画布背景层 */
+        #bg-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        /* 核心内容区 */
+        .content {
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            height: 100vh; /* 撑满整个屏幕高度 */
-            margin: 0;
-            background-color: #f9f9f9; /* 浅灰色背景，显得干净 */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            /* 浅色边缘遮罩，让视觉中心更通透 */
+            background: radial-gradient(circle at center, transparent 0%, #f8f9fa 90%);
+            pointer-events: none;
         }
 
-        /* 标题样式：小字 */
-        .homepage-title {
-            font-size: 14px; /* 较小的字号 */
-            color: #666; /* 深灰色字体 */
-            margin-bottom: 20px; /* 和下方按钮保持距离 */
-            letter-spacing: 1px;
+        /* 标题动画与鲜亮发光 */
+        h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: 0.8rem;
+            margin-bottom: 1rem;
+            color: #111;
+            /* 浅色背景下的亮蓝色呼吸光影 */
+            animation: float 4s ease-in-out infinite;
         }
 
-        /* 按钮样式 */
-        .visit-btn {
-            padding: 8px 24px;
-            font-size: 14px;
-            color: #fff;
-            background-color: #333; /* 黑色/深灰色按钮 */
-            border: none;
-            border-radius: 6px; /* 圆角边框 */
+        /* 副标题 */
+        .subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            color: #666;
+            letter-spacing: 0.5rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            animation: fadeIn 2s ease-out 0.5s both;
+        }
+
+        /* 动态分割线 */
+        .divider {
+            width: 40px;
+            height: 2px;
+            background: #ccc;
+            margin: 0 auto 2.5rem;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: expand 1.5s ease-out 1s both;
+        }
+
+        /* 个人简介简语 */
+        .description {
+            color: #555;
+            font-size: 1.1rem;
+            letter-spacing: 0.1rem;
+            margin-bottom: 3.5rem;
+            animation: fadeIn 2s ease-out 1.5s both;
+        }
+
+        /* 探索按钮 */
+        .btn {
+            pointer-events: auto;
+            padding: 14px 40px;
+            border: 1px solid #1a1a1a;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 2s ease-out 2s both;
+            background: transparent;
             cursor: pointer;
-            transition: background-color 0.2s ease;
         }
 
-        /* 鼠标悬浮在按钮上的效果 */
-        .visit-btn:hover {
-            background-color: #555;
+        /* 按钮扫光特效 */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 110, 255, 0.1), transparent);
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover {
+            color: #fff;
+            border-color: #006eff;
+            background-color: #006eff;
+            box-shadow: 0 5px 20px rgba(0, 110, 255, 0.4);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* 悬停内容区时，分割线拉长并变为亮色 */
+        .content:hover .divider {
+            width: 120px;
+            background: #006eff;
+            box-shadow: 0 0 15px rgba(0, 110, 255, 0.6);
+        }
+
+        /* 关键帧动画：光影悬浮呼吸 */
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0); 
+                text-shadow: 0 0 15px rgba(0, 110, 255, 0.1);
+            }
+            50% { 
+                transform: translateY(-8px); 
+                /* 发出鲜亮的蓝色呼吸光 */
+                text-shadow: 0 10px 30px rgba(0, 110, 255, 0.45); 
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes expand {
+            from { width: 0; opacity: 0; }
+            to { width: 40px; opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; letter-spacing: 0.5rem; }
+            .subtitle { font-size: 1rem; letter-spacing: 0.3rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="homepage-title">任乔洛的homepage</div>
+    <canvas id="bg-canvas"></canvas>
 
-    <button class="visit-btn" onclick="showPopup()">访问</button>
+    <div class="content">
+        <h1>任乔洛</h1>
+        <p class="subtitle">Art Director / 艺术总监</p>
+        <div class="divider"></div>
+        <p class="description">探索艺术的边界，重构音乐的灵魂。？好装啊这句话或者放别的话</p>
+        <p class="description">**再放点自我介绍在这里？**</p>
+        <a href="#" class="btn" onclick="alert('详细内容还没写，等会儿，先吃个饭，然后跟钟宝宝周末出去度假休息，'); return false;">ENTER PORTFOLIO</a>
+    </div>
 
     <script>
-        function showPopup() {
-            // 弹出浏览器原生提示框
-            alert("未开放,请稍后访问。任总监的成绩：数学：44，化学：16，物理：22，生物：24");
-        }
-    </script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
 
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 1.5 + 0.5; 
+                this.speedX = (Math.random() - 0.5) * 0.8; 
+                this.speedY = (Math.random() - 0.5) * 0.8; 
+                this.opacity = Math.random() * 0.6 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > width) this.speedX *= -1;
+                if (this.y < 0 || this.y > height) this.speedY *= -1;
+            }
+            draw() {
+                // 将粒子修改为鲜亮的蓝色系，使其在浅色背景中可见
+                ctx.fillStyle = `rgba(0, 110, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particles = [];
+            let particleCount = Math.floor(window.innerWidth / 10); 
+            if(particleCount > 120) particleCount = 120; 
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            
+            for(let i = 0; i < particles.length; i++) {
+                for(let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 130) {
+                        ctx.beginPath();
+                        // 连线也同样使用亮蓝色，根据距离控制透明度
+                        ctx.strokeStyle = `rgba(0, 110, 255, ${0.2 - distance/650})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+    </script>
 </body>
 </html>
