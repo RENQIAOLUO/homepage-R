@@ -3,259 +3,522 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>任乔洛 | 艺术总监</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
+    <title data-i18n="page_title">任乔洛 | 个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* 基础重置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8fafc; /* Slate 50 */
+            color: #334155; /* Slate 700 */
+            overflow-x: hidden;
+            position: relative;
         }
 
-        body, html {
-            width: 100%;
-            height: 100%;
-            background-color: #f8f9fa; /* 浅色明亮背景 */
-            color: #1a1a1a; /* 深灰色主文本 */
-            font-family: 'Noto Serif SC', serif;
-            overflow: hidden;
-        }
+        /* 自定义平滑滚动条 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-        /* 画布背景层 */
-        #bg-canvas {
-            position: absolute;
+        /* ========= 新增：全屏流星雨背景 Canvas ========= */
+        #meteor-canvas {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            opacity: 0.8;
+            z-index: -10; /* 确保在所有内容最底层 */
+            pointer-events: none; /* 穿透点击，不干扰内容交互 */
         }
+        /* ============================================= */
 
-        /* 核心内容区 */
-        .content {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            /* 浅色边缘遮罩，让视觉中心更通透 */
-            background: radial-gradient(circle at center, transparent 0%, #f8f9fa 90%);
-            pointer-events: none;
-        }
-
-        /* 标题动画与鲜亮发光 */
-        h1 {
-            font-size: 5rem;
-            font-weight: 700;
-            letter-spacing: 0.8rem;
-            margin-bottom: 1rem;
-            color: #111;
-            /* 浅色背景下的亮蓝色呼吸光影 */
-            animation: float 4s ease-in-out infinite;
-        }
-
-        /* 副标题 */
-        .subtitle {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.2rem;
-            color: #666;
-            letter-spacing: 0.5rem;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            animation: fadeIn 2s ease-out 0.5s both;
-        }
-
-        /* 动态分割线 */
-        .divider {
-            width: 40px;
-            height: 2px;
-            background: #ccc;
-            margin: 0 auto 2.5rem;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            animation: expand 1.5s ease-out 1s both;
-        }
-
-        /* 个人简介简语 */
-        .description {
-            color: #555;
-            font-size: 1.1rem;
-            letter-spacing: 0.1rem;
-            margin-bottom: 3.5rem;
-            animation: fadeIn 2s ease-out 1.5s both;
-        }
-
-        /* 探索按钮 */
-        .btn {
-            pointer-events: auto;
-            padding: 14px 40px;
-            border: 1px solid #1a1a1a;
-            color: #1a1a1a;
-            text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
-            letter-spacing: 0.2rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 2s ease-out 2s both;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        /* 按钮扫光特效 */
-        .btn::before {
-            content: '';
+        /* 左侧流体动画背景 (在 Canvas 之上，毛玻璃之下) */
+        .blob-bg {
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 110, 255, 0.1), transparent);
-            transition: all 0.4s ease;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 1; /* 比 Canvas 高，比毛玻璃低 */
+        }
+        .blob-1, .blob-2 {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: moveBlobs 12s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .blob-1 {
+            width: 300px; height: 300px;
+            background: #e0e7ff; /* Indigo 100 */
+            top: -50px; left: -50px;
+        }
+        .blob-2 {
+            width: 400px; height: 400px;
+            background: #fce7f3; /* Pink 100 */
+            bottom: -100px; right: -50px;
+            animation-delay: -5s;
+        }
+        @keyframes moveBlobs {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
         }
 
-        .btn:hover {
-            color: #fff;
-            border-color: #006eff;
-            background-color: #006eff;
-            box-shadow: 0 5px 20px rgba(0, 110, 255, 0.4);
+        /* 内容前景毛玻璃 */
+        .glass-panel {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
-        .btn:hover::before {
-            left: 100%;
+        /* 渐变文字 */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(135deg, #6366f1 0%, #d946ef 100%); /* Indigo to Fuchsia */
         }
 
-        /* 悬停内容区时，分割线拉长并变为亮色 */
-        .content:hover .divider {
-            width: 120px;
-            background: #006eff;
-            box-shadow: 0 0 15px rgba(0, 110, 255, 0.6);
+        /* 优雅的卡片悬浮 */
+        .elegant-card {
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 10; /* 确保卡片在 Canvas 之上 */
+        }
+        .elegant-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #e2e8f0;
         }
 
-        /* 关键帧动画：光影悬浮呼吸 */
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0); 
-                text-shadow: 0 0 15px rgba(0, 110, 255, 0.1);
-            }
-            50% { 
-                transform: translateY(-8px); 
-                /* 发出鲜亮的蓝色呼吸光 */
-                text-shadow: 0 10px 30px rgba(0, 110, 255, 0.45); 
-            }
+        /* 滚动出现动画 */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reveal-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* iOS风格分段控制器 (语言切换) */
+        .segment-control {
+            display: inline-flex;
+            background-color: #f1f5f9;
+            border-radius: 9999px;
+            padding: 4px;
+            position: relative;
         }
-
-        @keyframes expand {
-            from { width: 0; opacity: 0; }
-            to { width: 40px; opacity: 1; }
+        .segment-btn {
+            position: relative;
+            z-index: 2;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748b;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; letter-spacing: 0.5rem; }
-            .subtitle { font-size: 1rem; letter-spacing: 0.3rem; }
+        .segment-btn.active { color: #0f172a; }
+        .segment-indicator {
+            position: absolute;
+            top: 4px; bottom: 4px;
+            background-color: white;
+            border-radius: 9999px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
         }
     </style>
 </head>
-<body>
+<body class="antialiased flex flex-col lg:flex-row min-h-screen">
 
-    <canvas id="bg-canvas"></canvas>
+    <canvas id="meteor-canvas"></canvas>
+    <aside class="relative w-full lg:w-[35%] lg:fixed lg:h-screen border-r border-slate-200">
+        <div class="blob-bg hidden lg:block">
+            <div class="blob-1"></div>
+            <div class="blob-2"></div>
+        </div>
+        
+        <div class="glass-panel h-full flex flex-col justify-between p-8 md:p-12 lg:p-16">
+            <div>
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-3xl overflow-hidden shadow-2xl mb-8 border border-white/60 transform rotate-3 hover:rotate-0 transition duration-500 relative z-20">
+                    <img src="gan.jpg" alt="GAN" class="w-full h-full object-cover">
+                </div>
+                
+                <h1 data-i18n="hero_title" class="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight text-slate-900 relative z-20">你好，我是 <span class="text-gradient">[任乔洛]</span></h1>
+                <p data-i18n="hero_desc" class="text-slate-600 leading-relaxed mb-10 text-sm md:text-base relative z-20">
+                    目前专注于综合艺术文化的学科研究。我热衷于在音乐领域探索如何利用各种不同艺术专业来共同理解和创造艺术。
+                </p>
 
-    <div class="content">
-        <h1>任乔洛</h1>
-        <p class="subtitle">Art Director / 艺术总监</p>
-        <div class="divider"></div>
-        <p class="description">探索艺术的边界，重构音乐的灵魂。？好装啊这句话或者放别的话</p>
-        <p class="description">**再放点自我介绍在这里？**</p>
-        <a href="#" class="btn" onclick="alert('详细内容还没写，等会儿，先吃个饭，然后跟钟宝宝周末出去度假休息，，，下周一还有专业课怎么办，，希望我们的项目能够冲进ACMMM三轮！！！！'); return false;">ENTER PORTFOLIO</a>
+
+
+                
+                <div class="flex flex-col gap-3 mb-10 text-xs md:text-sm relative z-20">
+    <div class="flex items-center gap-2 text-amber-700 bg-amber-50 border border-amber-200/60 px-4 py-2 rounded-xl w-fit">
+        <span>🚧</span>
+        <span>英语和日语的翻译未改！！</span>
     </div>
+    <div class="flex items-center gap-2 text-indigo-700 bg-indigo-50 border border-indigo-200/60 px-4 py-2 rounded-xl w-fit">
+        <span>❓</span>
+        <span>更改说明文字！！</span>
+    </div>
+</div>
+
+
+
+                
+
+                <nav class="hidden lg:flex flex-col space-y-4 mb-10 font-semibold text-sm relative z-20">
+                    <a href="#research" class="text-slate-400 hover:text-indigo-600 transition flex items-center group"><span class="w-4 h-[2px] bg-slate-300 mr-3 group-hover:w-8 group-hover:bg-indigo-600 transition-all"></span> <span data-i18n="nav_research">研究</span></a>
+                    <a href="#publications" class="text-slate-400 hover:text-indigo-600 transition flex items-center group"><span class="w-4 h-[2px] bg-slate-300 mr-3 group-hover:w-8 group-hover:bg-indigo-600 transition-all"></span> <span data-i18n="pub_title">近期论文</span></a>
+                    <a href="#projects" class="text-slate-400 hover:text-indigo-600 transition flex items-center group"><span class="w-4 h-[2px] bg-slate-300 mr-3 group-hover:w-8 group-hover:bg-indigo-600 transition-all"></span> <span data-i18n="nav_projects">项目</span></a>
+                </nav>
+
+                <div class="flex gap-4 relative z-20">
+                    <a href="https://github.com" class="bg-slate-900 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-indigo-600 transition shadow-lg"><i class="fab fa-github"></i></a>
+                    <a href="mailto:qiaoluo062@gmail.com" class="bg-white border border-slate-200 text-slate-700 w-10 h-10 rounded-full flex items-center justify-center hover:text-indigo-600 hover:border-indigo-200 transition shadow-sm"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <div class="mt-12 lg:mt-0 relative z-20">
+                <div class="segment-control" id="lang-switch-container">
+                    <div class="segment-indicator" id="segment-indicator"></div>
+                    <button class="segment-btn active" data-lang="zh">中文</button>
+                    <button class="segment-btn" data-lang="en">English</button>
+                    <button class="segment-btn" data-lang="ja">日本語</button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="w-full lg:w-[65%] lg:ml-[35%] p-8 md:p-16 lg:p-24 pb-32">
+        <div class="max-w-3xl mx-auto space-y-32">
+
+            <section id="research" class="reveal-item pt-8 lg:pt-0">
+                <h2 data-i18n="research_title" class="text-2xl font-extrabold text-slate-900 mb-10 tracking-tight">研究兴趣</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="elegant-card p-8 rounded-3xl">
+                        <div class="w-12 h-12 bg-indigo-50 text-indigo-500 rounded-2xl flex items-center justify-center mb-6">
+                            <i class="fas fa-music text-xl"></i>
+                        </div>
+                        <h3 data-i18n="res1_title" class="font-bold text-lg mb-3 text-slate-800">综合艺术文化研究</h3>
+                        <p data-i18n="res1_desc" class="text-slate-500 text-sm leading-relaxed">综合艺术文化实践与学术研究深度结合，致力于将艺术领域不同专业融汇贯通，并从学术视角探索音乐诠释的理论逻辑与创新边界。</p>
+                    </div>
+                    <div class="elegant-card p-8 rounded-3xl">
+                        <div class="w-12 h-12 bg-fuchsia-50 text-fuchsia-500 rounded-2xl flex items-center justify-center mb-6">
+                            <i class="fas fa-microchip text-xl"></i>
+                        </div>
+                        <h3 data-i18n="res2_title" class="font-bold text-lg mb-3 text-slate-800">作曲（乐书）研究</h3>
+                        <p data-i18n="res2_desc" class="text-slate-500 text-sm leading-relaxed">立足于作曲技法与乐谱文献，研究音乐结构的内在逻辑及其在当代技术环境下的生成机制。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="publications" class="reveal-item">
+                <h2 data-i18n="pub_title" class="text-2xl font-extrabold text-slate-900 mb-10 tracking-tight">近期论文</h2>
+                <div class="space-y-6">
+                    <div class="elegant-card p-8 rounded-3xl">
+                        <span data-i18n="pub_status" class="inline-block text-[10px] font-bold uppercase tracking-widest text-indigo-600 px-3 py-1 bg-indigo-50 rounded-full mb-4">审查中</span>
+                        <h3 class="font-bold text-lg text-slate-900 mb-3 leading-snug">[Invalid Noise Ratio: An Artifact-Aware Evaluation Metric for AI-Generated Chiptune Music]</h3>
+                        <p data-i18n="pub_desc" class="text-slate-500 text-sm">无效噪声比：一种面向 AI 生成芯片音乐的伪影感知评价指标</p>
+                    </div>
+
+                    <div class="elegant-card p-8 rounded-3xl">
+                        <span data-i18n="pub2_status" class="inline-block text-[10px] font-bold uppercase tracking-widest text-emerald-600 px-3 py-1 bg-emerald-50 rounded-full mb-4">已发表（校内）</span>
+                        <h3 class="font-bold text-lg text-slate-900 mb-3 leading-snug">["Kang" and "Ning": A quantifiable indicator of human pleasure and pain in a biological sense]</h3>
+                        <p data-i18n="pub2_desc" class="text-slate-500 text-sm">抗柠指标：生物学意义上的人类愉悦与痛苦的量化指标</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="reveal-item">
+                <h2 data-i18n="projects_title" class="text-2xl font-extrabold text-slate-900 mb-10 tracking-tight">近期专案</h2>
+                <div class="space-y-6">
+                    <div class="elegant-card p-8 rounded-3xl flex flex-col sm:flex-row sm:items-start justify-between gap-6">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900" data-i18n="proj1_title">柔情趁年少</h3>
+                            <p class="text-xs text-slate-400 mt-2 font-medium" data-i18n="proj1_roles">作词：张哲凯 | 作曲：甘弦朋 | 编曲：甘弦朋 | 制作人：甘弦朋</p>
+                            <p class="text-indigo-500 text-sm mt-3 italic" data-i18n="proj1_desc">“尽管聚散与成长都是常道”</p>
+                        </div>
+                        <button disabled class="shrink-0 px-6 py-2 bg-slate-100 text-slate-400 rounded-full cursor-not-allowed font-semibold text-xs tracking-wide" data-i18n="btn_listen">试听</button>
+                    </div>
+
+                    <div class="elegant-card p-8 rounded-3xl flex flex-col sm:flex-row sm:items-start justify-between gap-6">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-900" data-i18n="proj2_title">呢喃</h3>
+                            <p class="text-xs text-slate-400 mt-2 font-medium" data-i18n="proj2_roles">作词：舒彦童 | 作曲：甘弦朋 | 编曲：甘弦朋 | 制作人：甘弦朋</p>
+                            <p class="text-indigo-500 text-sm mt-3 italic" data-i18n="proj2_desc">“泛黄的相册与漫天的落叶”</p>
+                        </div>
+                        <button disabled class="shrink-0 px-6 py-2 bg-slate-100 text-slate-400 rounded-full cursor-not-allowed font-semibold text-xs tracking-wide" data-i18n="btn_listen">试听</button>
+                    </div>
+
+                    <div id="hidden-project" class="hidden">
+                        <div class="elegant-card p-8 rounded-3xl flex flex-col sm:flex-row sm:items-start justify-between gap-6 reveal-item">
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-900" data-i18n="proj3_title">孤独盆栽</h3>
+                                <p class="text-xs text-slate-400 mt-2 font-medium" data-i18n="proj3_roles">作词：任乔洛 | 作曲：任乔洛 | 编曲：甘弦朋 | 制作人：钟其高</p>
+                                <p class="text-indigo-500 text-sm mt-3 italic" data-i18n="proj3_desc">“困于方寸，向光而生。无人问津，独自盛放”</p>
+                            </div>
+                            <button disabled class="shrink-0 px-6 py-2 bg-slate-100 text-slate-400 rounded-full cursor-not-allowed font-semibold text-xs tracking-wide" data-i18n="btn_listen">试听</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10">
+                    <button id="show-more-btn" class="flex items-center text-sm font-semibold text-indigo-600 hover:text-fuchsia-500 transition-colors group relative z-20">
+                        <span data-i18n="btn_show_more">显示更多</span>
+                        <i class="fas fa-arrow-down ml-2 group-hover:translate-y-1 transition-transform"></i>
+                    </button>
+                </div>
+            </section>
+            
+            <footer id="contact" class="pt-20 border-t border-slate-200">
+                <p data-i18n="footer_text" class="text-slate-400 text-sm relative z-20">© 2026 [任乔洛]. 基于 GitHub Pages 构建.</p>
+            </footer>
+        </div>
+    </main>
 
     <script>
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 1.5 + 0.5; 
-                this.speedX = (Math.random() - 0.5) * 0.8; 
-                this.speedY = (Math.random() - 0.5) * 0.8; 
-                this.opacity = Math.random() * 0.6 + 0.2;
+        // ======= 翻译数据 =======
+        const translations = {
+            zh: {
+                page_title: "任乔洛 | 个人主页",
+                nav_name: "任乔洛",
+                nav_about: "关于我",
+                nav_research: "研究",
+                nav_projects: "项目",
+                nav_contact: "联系",
+                hero_title: "你好，我是 <span class='text-gradient'>[任乔洛]</span>",
+                hero_desc: "目前专注于综合艺术文化的学科研究。我热衷于在音乐领域探索如何利用各种不同艺术专业来共同理解和创造艺术。",
+                research_title: "研究兴趣",
+                res1_title: "综合艺术文化研究",
+                res1_desc: "综合艺术文化实践与学术研究深度结合，致力于将艺术领域不同专业融汇贯通，并从学术视角探索音乐诠释的理论逻辑与创新边界。",
+                res2_title: "作曲（乐书）研究",
+                res2_desc: "立足于作曲技法与乐谱文献，研究音乐结构的内在逻辑及其在当代技术环境下的生成机制。",
+                pub_title: "近期论文",
+                pub_status: "审查中",
+                pub_desc: "无效噪声比：一种面向 AI 生成芯片音乐的伪影感知评价指标.",
+                pub2_status: "已发表（校内）",
+                pub2_desc: "抗柠指标：生物学意义上的人类愉悦与痛苦的量化指标",
+                projects_title: "近期专案",
+                proj1_title: "柔情趁年少",
+                proj1_roles: "作词：张哲凯 | 作曲：甘弦朋 | 编曲：甘弦朋 | 制作人：甘弦朋",
+                proj1_desc: "“尽管聚散与成长都是常道”",
+                proj2_title: "呢喃",
+                proj2_roles: "作词：舒彦童 | 作曲：甘弦朋 | 编曲：甘弦朋 | 制作人：甘弦朋",
+                proj2_desc: "“泛黄的相册与漫天的落叶”",
+                proj3_title: "孤独盆栽",
+                proj3_roles: "作词：任乔洛 | 作曲：任乔洛 | 编曲：甘弦朋 | 制作人：钟其高",
+                proj3_desc: "“困于方寸，向光而生。无人问津，独自盛放。”",
+                btn_listen: "试听",
+                btn_show_more: "显示更多",
+                footer_text: "© 2026 [任乔洛]. 基于 GitHub Pages 构建."
+            },
+            en: {
+                page_title: "Ren Qiaoluo | Portfolio",
+                nav_name: "Ren Qiaoluo",
+                nav_about: "About",
+                nav_research: "Research",
+                nav_projects: "Projects",
+                nav_contact: "Contact",
+                hero_title: "Hi, I am <span class='text-gradient'>[Ren Qiaoluo]</span>",
+                hero_desc: "Currently focusing on academic research in instrumental performance (piano). I am passionate about exploring how to use deep learning technologies to understand and create art.",
+                research_title: "Research Interests",
+                res1_title: "Instrumental Performance (Piano)",
+                res1_desc: "Combining artistic practice with academic research, dedicated to refining piano performance art, and exploring the theoretical logic and innovative boundaries of musical interpretation.",
+                res2_title: "Composition (Musical Scores)",
+                res2_desc: "Based on composition techniques and musical score literature, researching the internal logic of musical structures and their generation mechanisms in contemporary technological environments.",
+                pub_title: "Recent Publications",
+                pub_status: "Under Review",
+                pub_desc: "Invalid Noise Ratio: An Artifact-Aware Evaluation Metric for AI-Generated Chiptune Music.",
+                pub2_status: "Published (Internal)",
+                pub2_desc: "“Public Glory” and “Private Monologue”: Analysis and Interpretation of Two Piano Works by Mikhail Ivanovich Glinka",
+                projects_title: "Recent Projects",
+                proj1_title: "Tenderness while young",
+                proj1_roles: "Lyricist: Zhang Zhekai | Composer: Gan Xianpeng | Arranger: Gan Xianpeng | Producer: Gan Xianpeng",
+                proj1_desc: "“Although gathering, parting, and growing up are the norm”",
+                proj2_title: "Whisper",
+                proj2_roles: "Lyricist: Shu Yantong | Composer: Gan Xianpeng | Arranger: Gan Xianpeng | Producer: Gan Xianpeng",
+                proj2_desc: "“Yellowing photo albums and falling leaves”",
+                proj3_title: "Lonely Potted Plant",
+                proj3_roles: "Lyricist: Ren Qiaoluo | Composer: Ren Qiaoluo | Arranger: Gan Xianpeng | Producer: Zhong Qigao",
+                proj3_desc: "“Trapped in a square inch, growing towards the light, unnoticed and blooming alone.”",
+                btn_listen: "Listen",
+                btn_show_more: "Show More",
+                footer_text: "© 2026 [Gan Xianpeng]. Built with GitHub Pages."
+            },
+            ja: {
+                page_title: "甘弦朋 | 個人ポートフォリオ",
+                nav_name: "甘弦朋",
+                nav_about: "私について",
+                nav_research: "研究",
+                nav_projects: "プロジェクト",
+                nav_contact: "お問い合わせ",
+                hero_title: "こんにちは、<span class='text-gradient'>[甘弦朋]</span>です",
+                hero_desc: "現在、楽器演奏（ピアノ）の学術研究に専念しています。ディープラーニング技術を活用して芸術を理解し、創造することに情熱を注いでいます。",
+                research_title: "研究の関心",
+                res1_title: "器楽演奏（ピアノ）研究",
+                res1_desc: "芸術的実践と学術研究を深く結びつけ、ピアノ演奏芸術の探求に専念し、学術的な視点から音楽解釈の理論的論理と革新の境界を探求します。",
+                res2_title: "作曲（楽譜）研究",
+                res2_desc: "作曲技法と楽譜文献に基づいて、音楽構造の内部論理と現代の技術環境下での生成メカニズムを研究します。",
+                pub_title: "最近の論文",
+                pub_status: "査読中",
+                pub_desc: "無効ノイズ比：AI生成チップチューン音楽のためのアーティファクトを考慮した評価指標.",
+                pub2_status: "発表済み（学内）",
+                pub2_desc: "「公の栄光」と「私の独白」：ミハイル・イヴァノヴィチ・グリンカの2つのピアノ作品の分析と解釈",
+                projects_title: "最近のプロジェクト",
+                proj1_title: "Tenderness while young",
+                proj1_roles: "作詞：張哲凱 | 作曲：甘弦朋 | 編曲：甘弦朋 | プロデューサー：甘弦朋",
+                proj1_desc: "「出会いと别れ、そして成長は常であるとはいえ」",
+                proj2_title: "囁き (呢喃)",
+                proj2_roles: "作詞：舒彦童 | 作曲：甘弦朋 | 編曲：甘弦朋 | プロデューサー：甘弦朋",
+                proj2_desc: "「色褪せたアルバムと空一面の落ち葉」",
+                proj3_title: "孤独な盆栽",
+                proj3_roles: "作詞：任喬洛 | 作曲：任喬洛 | 編曲：甘弦朋 | プロデューサー：鐘其高",
+                proj3_desc: "「小さな空間に囚われ、光に向かって生き.誰にも気付かれず、一人咲き誇る。」",
+                btn_listen: "試聴",
+                btn_show_more: "さらに表示",
+                footer_text: "© 2026 [甘弦朋]. GitHub Pages で構築."
             }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > width) this.speedX *= -1;
-                if (this.y < 0 || this.y > height) this.speedY *= -1;
-            }
-            draw() {
-                // 将粒子修改为鲜亮的蓝色系，使其在浅色背景中可见
-                ctx.fillStyle = `rgba(0, 110, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+        };
 
-        function init() {
-            particles = [];
-            let particleCount = Math.floor(window.innerWidth / 10); 
-            if(particleCount > 120) particleCount = 120; 
-            
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
+        // ======= 多语言及控件动画逻辑 =======
+        const btns = document.querySelectorAll('.segment-btn');
+        const indicator = document.getElementById('segment-indicator');
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
             });
-            
-            for(let i = 0; i < particles.length; i++) {
-                for(let j = i; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 130) {
-                        ctx.beginPath();
-                        // 连线也同样使用亮蓝色，根据距离控制透明度
-                        ctx.strokeStyle = `rgba(0, 110, 255, ${0.2 - distance/650})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+        }
+
+        function setIndicator(btn) {
+            indicator.style.width = `${btn.offsetWidth}px`;
+            indicator.style.left = `${btn.offsetLeft}px`;
+        }
+
+        btns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                btns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                setIndicator(e.target);
+                updateLanguage(e.target.getAttribute('data-lang'));
+            });
+        });
+
+        // 初始化指示器位置
+        window.addEventListener('load', () => setIndicator(document.querySelector('.segment-btn.active')));
+        window.addEventListener('resize', () => setIndicator(document.querySelector('.segment-btn.active')));
+
+        // ======= 显示更多逻辑 =======
+        const showMoreBtn = document.getElementById('show-more-btn');
+        const hiddenProject = document.getElementById('hidden-project');
+        
+        if (showMoreBtn && hiddenProject) {
+            showMoreBtn.addEventListener('click', () => {
+                hiddenProject.classList.remove('hidden');
+                showMoreBtn.style.display = 'none';
+                // 延迟触发动画
+                setTimeout(() => {
+                    hiddenProject.querySelector('.reveal-item').classList.add('is-visible');
+                }, 50);
+            });
+        }
+
+        // ======= 滚动视差出现 (Scroll Reveal) =======
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // 可选：如果只想动画一次，可以取消观察
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ======= 新增：全屏流星雨背景 Canvas 渲染 =======
+        const canvas = document.getElementById('meteor-canvas');
+        const ctx = canvas.getContext('2d');
+        let meteors = [];
+        let numMeteors = 100; // 流星数量
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Meteor {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.x = Math.random() * canvas.width * 2 - canvas.width; // 随机 X，范围更广以覆盖整个屏幕
+                this.y = Math.random() * -canvas.height; // 随机 Y，在屏幕上方
+                this.speed = Math.random() * 5 + 3; // 随机速度
+                this.length = Math.random() * 80 + 20; // 随机长度
+                this.opacity = Math.random(); // 随机不透明度
+                this.size = Math.random() * 2 + 1; // 随机粗细
+                // 浅蓝色色调：r=102, g=178, b=255 -> 0.4*r, 0.7*g, 1.0*b -> r=102*0.4, g=178*0.7, b=255*1.0
+                const blueBase = [102, 178, 255];
+                this.color = `rgba(${blueBase[0] * 0.4}, ${blueBase[1] * 0.7}, ${blueBase[2] * 1.0}, ${this.opacity})`;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x + this.length, this.y + this.length);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = this.size;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+            }
+
+            update() {
+                this.x += this.speed;
+                this.y += this.speed;
+
+                // 如果流星移出屏幕，则重新初始化
+                if (this.x > canvas.width || this.y > canvas.height) {
+                    this.init();
                 }
             }
-            requestAnimationFrame(animate);
         }
 
-        init();
-        animate();
+        function createMeteors() {
+            for (let i = 0; i < numMeteors; i++) {
+                meteors.push(new Meteor());
+            }
+        }
+
+        function animateMeteors() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // 清空 Canvas
+            for (let i = 0; i < meteors.length; i++) {
+                meteors[i].draw();
+                meteors[i].update();
+            }
+            requestAnimationFrame(animateMeteors);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        createMeteors();
+        animateMeteors();
     </script>
 </body>
 </html>
