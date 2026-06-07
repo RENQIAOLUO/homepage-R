@@ -149,7 +149,7 @@
         <div class="glass-panel h-full flex flex-col justify-between p-8 md:p-12 lg:p-16">
             <div>
                 <div class="w-32 h-32 md:w-40 md:h-40 rounded-3xl overflow-hidden shadow-2xl mb-8 border border-white/60 transform rotate-3 hover:rotate-0 transition duration-500 relative z-20">
-                    <img src="gan.jpg" alt="GAN" class="w-full h-full object-cover">
+                    <img src="gang.jpg" alt="GAN" class="w-full h-full object-cover">
                 </div>
                 
                 <h1 data-i18n="hero_title" class="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight text-slate-900 relative z-20">你好，我是 <span class="text-gradient">[任乔洛]</span></h1>
@@ -157,23 +157,12 @@
                     目前专注于综合艺术文化的学科研究。我热衷于在音乐领域探索如何利用自己的逻辑思考来理解和创造艺术，擅长于把抽象思维转变为现实表达。
                 </p>
 
-
-
-                
                 <div class="flex flex-col gap-3 mb-10 text-xs md:text-sm relative z-20">
-    <div class="flex items-center gap-2 text-amber-700 bg-amber-50 border border-amber-200/60 px-4 py-2 rounded-xl w-fit">
-        <span>🚧</span>
-        <span>英语和日语的翻译未改！！</span>
-    </div>
-    <div class="flex items-center gap-2 text-indigo-700 bg-indigo-50 border border-indigo-200/60 px-4 py-2 rounded-xl w-fit">
-        <span>❓</span>
-        <span>最后更新时间20260607 19：52</span>
-    </div>
-</div>
-
-
-
-                
+                    <div class="flex items-center gap-2 text-indigo-700 bg-indigo-50 border border-indigo-200/60 px-4 py-2 rounded-xl w-fit">
+                        <span>⏰</span>
+                        <span>最后更新时间：6666年66月66日</span>
+                    </div>
+                </div>
 
                 <nav class="hidden lg:flex flex-col space-y-4 mb-10 font-semibold text-sm relative z-20">
                     <a href="#research" class="text-slate-400 hover:text-indigo-600 transition flex items-center group"><span class="w-4 h-[2px] bg-slate-300 mr-3 group-hover:w-8 group-hover:bg-indigo-600 transition-all"></span> <span data-i18n="nav_research">研究</span></a>
@@ -247,7 +236,10 @@
                             <p class="text-xs text-slate-400 mt-2 font-medium" data-i18n="proj1_roles">作词：任乔洛 | 作曲：任乔洛 | 编曲：任乔洛 | 制作人：任乔洛</p>
                             <p class="text-indigo-500 text-sm mt-3 italic" data-i18n="proj1_desc">“沉溺痛苦，是因为痛苦能让人感受到存在的意义”</p>
                         </div>
-                        <button class="audio-btn shrink-0 px-6 py-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-full cursor-pointer font-semibold text-xs tracking-wide transition-colors" data-audio-src="audio1.mp3" data-i18n="btn_listen">试听</button>
+                        <div class="shrink-0 flex flex-col items-stretch gap-2">
+                            <button class="audio-btn px-6 py-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-full cursor-pointer font-semibold text-xs tracking-wide transition-colors" data-audio-src="./music/zijiu.mp3" data-i18n="btn_listen">试听</button>
+                            <input type="range" min="0" max="100" value="0" class="audio-progress hidden w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 outline-none">
+                        </div>
                     </div>
 
                     <div class="elegant-card p-8 rounded-3xl flex flex-col sm:flex-row sm:items-start justify-between gap-6">
@@ -256,7 +248,10 @@
                             <p class="text-xs text-slate-400 mt-2 font-medium" data-i18n="proj2_roles">作词：任乔洛 | 作曲：任乔洛 | 编曲：任乔洛 | 制作人：任乔洛</p>
                             <p class="text-indigo-500 text-sm mt-3 italic" data-i18n="proj2_desc">“母女间的代际创伤和爱像一场下不完的雨”</p>
                         </div>
-                        <button class="audio-btn shrink-0 px-6 py-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-full cursor-pointer font-semibold text-xs tracking-wide transition-colors" data-audio-src="audio2.mp3" data-i18n="btn_listen">试听</button>
+                        <div class="shrink-0 flex flex-col items-stretch gap-2">
+                            <button class="audio-btn px-6 py-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-full cursor-pointer font-semibold text-xs tracking-wide transition-colors" data-audio-src="./music/muzhi.mp3" data-i18n="btn_listen">试听</button>
+                            <input type="range" min="0" max="100" value="0" class="audio-progress hidden w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 outline-none">
+                        </div>
                     </div>
 
                     <div id="hidden-project" class="hidden">
@@ -266,7 +261,10 @@
                                 <p class="text-xs text-slate-400 mt-2 font-medium" data-i18n="proj3_roles">作词：任乔洛 | 作曲：任乔洛 | 编曲：甘弦朋 | 制作人：钟其高</p>
                                 <p class="text-indigo-500 text-sm mt-3 italic" data-i18n="proj3_desc">“谁都无法永远成为多数派，要找到自己微观的幸福”</p>
                             </div>
-                            <button class="audio-btn shrink-0 px-6 py-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-full cursor-pointer font-semibold text-xs tracking-wide transition-colors" data-audio-src="audio3.mp3" data-i18n="btn_listen">试听</button>
+                            <div class="shrink-0 flex flex-col items-stretch gap-2">
+                                <button class="audio-btn px-6 py-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-full cursor-pointer font-semibold text-xs tracking-wide transition-colors" data-audio-src="./music/gudu.mp3" data-i18n="btn_listen">试听</button>
+                                <input type="range" min="0" max="100" value="0" class="audio-progress hidden w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 outline-none">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -329,63 +327,63 @@
                 nav_projects: "Projects",
                 nav_contact: "Contact",
                 hero_title: "Hi, I am <span class='text-gradient'>[Ren Qiaoluo]</span>",
-                hero_desc: "Currently focusing on academic research in instrumental performance (piano). I am passionate about exploring how to use deep learning technologies to understand and create art.",
+                hero_desc: "Currently focusing on interdisciplinary research in art and culture. I am passionate about exploring how to use logical thinking to understand and create art in the music field, excelling at transforming abstract concepts into practical expressions.",
                 research_title: "Research Interests",
-                res1_title: "Instrumental Performance (Piano)",
-                res1_desc: "Combining artistic practice with academic research, dedicated to refining piano performance art, and exploring the theoretical logic and innovative boundaries of musical interpretation.",
-                res2_title: "Composition (Musical Scores)",
-                res2_desc: "Based on composition techniques and musical score literature, researching the internal logic of musical structures and their generation mechanisms in contemporary technological environments.",
+                res1_title: "Interdisciplinary Art & Culture Research",
+                res1_desc: "Deeply integrating art practice with academic research, dedicated to bridging different disciplines within the arts, and exploring the theoretical logic and innovative boundaries of musical interpretation from an academic perspective.",
+                res2_title: "Composition (Score) Research",
+                res2_desc: "Grounded in composition techniques and musical score literature, researching the intrinsic logic of musical structures and their generative mechanisms in contemporary technological environments.",
                 pub_title: "Recent Publications",
                 pub_status: "Under Review",
                 pub_desc: "Invalid Noise Ratio: An Artifact-Aware Evaluation Metric for AI-Generated Chiptune Music.",
                 pub2_status: "Published (Internal)",
-                pub2_desc: "“Public Glory” and “Private Monologue”: Analysis and Interpretation of Two Piano Works by Mikhail Ivanovich Glinka",
+                pub2_desc: "“Kang” and “Ning”: A quantifiable indicator of human pleasure and pain in a biological sense",
                 projects_title: "Recent Projects",
-                proj1_title: "Tenderness while young",
-                proj1_roles: "Lyricist: Zhang Zhekai | Composer: Gan Xianpeng | Arranger: Gan Xianpeng | Producer: Gan Xianpeng",
-                proj1_desc: "“Although gathering, parting, and growing up are the norm”",
-                proj2_title: "Whisper",
-                proj2_roles: "Lyricist: Shu Yantong | Composer: Gan Xianpeng | Arranger: Gan Xianpeng | Producer: Gan Xianpeng",
-                proj2_desc: "“Yellowing photo albums and falling leaves”",
+                proj1_title: "Nursery Rhymes for Self-Salvation",
+                proj1_roles: "Lyrics: Ren Qiaoluo | Composer: Ren Qiaoluo | Arranger: Ren Qiaoluo | Producer: Ren Qiaoluo",
+                proj1_desc: "“Indulging in pain is because pain makes one feel the meaning of existence”",
+                proj2_title: "Invalid Motherhood",
+                proj2_roles: "Lyrics: Ren Qiaoluo | Composer: Ren Qiaoluo | Arranger: Ren Qiaoluo | Producer: Ren Qiaoluo",
+                proj2_desc: "“Intergenerational trauma and love between mother and daughter are like endless rain”",
                 proj3_title: "Lonely Potted Plant",
-                proj3_roles: "Lyricist: Ren Qiaoluo | Composer: Ren Qiaoluo | Arranger: Gan Xianpeng | Producer: Zhong Qigao",
-                proj3_desc: "“Trapped in a square inch, growing towards the light, unnoticed and blooming alone.”",
+                proj3_roles: "Lyrics: Ren Qiaoluo | Composer: Ren Qiaoluo | Arranger: Gan Xianpeng | Producer: Zhong Qigao",
+                proj3_desc: "“No one can be the majority forever; one must find their own microscopic happiness”",
                 btn_listen: "Listen",
                 btn_show_more: "Show More",
-                footer_text: "© 2026 [Gan Xianpeng]. Built with GitHub Pages."
+                footer_text: "© 2026 [Ren Qiaoluo]. Built with GitHub Pages."
             },
             ja: {
-                page_title: "任乔洛 | 個人ポートフォリオ",
-                nav_name: "甘弦朋",
+                page_title: "任喬洛 | 個人ポートフォリオ",
+                nav_name: "任喬洛",
                 nav_about: "私について",
                 nav_research: "研究",
                 nav_projects: "プロジェクト",
                 nav_contact: "お問い合わせ",
-                hero_title: "こんにちは、<span class='text-gradient'>[甘弦朋]</span>です",
-                hero_desc: "現在、楽器演奏（ピアノ）の学術研究に専念しています。ディープラーニング技術を活用して芸術を理解し、創造することに情熱を注いでいます。",
+                hero_title: "こんにちは、<span class='text-gradient'>[任喬洛]</span>です",
+                hero_desc: "現在、総合芸術文化の学術研究に専念しています。音楽分野で論理的思考を用いて芸術を理解し創造することに情熱を注いでおり、抽象的な思考を現実の表現に変換することを得意としています。",
                 research_title: "研究の関心",
-                res1_title: "器楽演奏（ピアノ）研究",
-                res1_desc: "芸術的実践と学術研究を深く結びつけ、ピアノ演奏芸術の探求に専念し、学術的な視点から音楽解釈の理論的論理と革新の境界を探求します。",
+                res1_title: "総合芸術文化研究",
+                res1_desc: "総合芸術文化の実践と学術研究を深く結びつけ、芸術分野の異なる専門分野の融合に尽力し、学術的な視点から音楽解釈の理論的論理と革新の境界を探求します。",
                 res2_title: "作曲（楽譜）研究",
-                res2_desc: "作曲技法と楽譜文献に基づいて、音楽構造の内部論理と現代の技術環境下での生成メカニズムを研究します。",
+                res2_desc: "作曲技法と楽譜文献に基づき、音楽構造の内的論理と現代の技術環境下での生成メカニズムを研究します。",
                 pub_title: "最近の論文",
                 pub_status: "査読中",
-                pub_desc: "無効ノイズ比：AI生成チップチューン音楽のためのアーティファクトを考慮した評価指標.",
+                pub_desc: "無効ノイズ比：AI生成チップチューン音楽のためのアーティファクトを考慮した評価指標。",
                 pub2_status: "発表済み（学内）",
-                pub2_desc: "「公の栄光」と「私の独白」：ミハイル・イヴァノヴィチ・グリンカの2つのピアノ作品の分析と解釈",
+                pub2_desc: "抗柠（カンニン）指標：生物学的意味における人間の喜びと苦痛の定量化指標",
                 projects_title: "最近のプロジェクト",
-                proj1_title: "Tenderness while young",
-                proj1_roles: "作詞：張哲凱 | 作曲：甘弦朋 | 編曲：甘弦朋 | プロデューサー：甘弦朋",
-                proj1_desc: "「出会いと别れ、そして成長は常であるとはいえ」",
-                proj2_title: "囁き (呢喃)",
-                proj2_roles: "作詞：舒彦童 | 作曲：甘弦朋 | 編曲：甘弦朋 | プロデューサー：甘弦朋",
-                proj2_desc: "「色褪せたアルバムと空一面の落ち葉」",
+                proj1_title: "自救童謡",
+                proj1_roles: "作詞：任喬洛 | 作曲：任喬洛 | 編曲：任喬洛 | プロデューサー：任喬洛",
+                proj1_desc: "「苦痛に溺れるのは、苦痛が存在の意義を感じさせてくれるからだ」",
+                proj2_title: "母職無効",
+                proj2_roles: "作詞：任喬洛 | 作曲：任喬洛 | 編曲：任喬洛 | プロデューサー：任喬洛",
+                proj2_desc: "「母娘間の世代間トラウマと愛は、降り止まない雨のようだ」",
                 proj3_title: "孤独な盆栽",
                 proj3_roles: "作詞：任喬洛 | 作曲：任喬洛 | 編曲：甘弦朋 | プロデューサー：鐘其高",
-                proj3_desc: "「小さな空間に囚われ、光に向かって生き.誰にも気付かれず、一人咲き誇る。」",
+                proj3_desc: "「誰もが永遠に多数派でいることはできない。自分だけのミクロな幸せを見つけるべきだ」",
                 btn_listen: "試聴",
                 btn_show_more: "さらに表示",
-                footer_text: "© 2026 [甘弦朋]. GitHub Pages で構築."
+                footer_text: "© 2026 [任喬洛]. GitHub Pages で構築."
             }
         };
 
@@ -441,8 +439,6 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    // 可选：如果只想动画一次，可以取消观察
-                    // observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
@@ -520,53 +516,113 @@
         createMeteors();
         animateMeteors();
 
-        // ======= 音频播放逻辑 =======
+        // ======= 音频播放及进度条逻辑 =======
         let currentAudio = null;
         let currentBtn = null;
+        let currentProgressBar = null;
+
+        // 重置所有播放状态与样式
+        function resetAudioState() {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+            if (currentBtn) {
+                currentBtn.classList.remove('bg-indigo-600', 'text-white');
+                currentBtn.classList.add('bg-indigo-50', 'text-indigo-600');
+                currentBtn = null;
+            }
+            if (currentProgressBar) {
+                currentProgressBar.classList.add('hidden');
+                currentProgressBar.value = 0;
+                currentProgressBar = null;
+            }
+        }
 
         document.querySelectorAll('.audio-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const audioSrc = this.getAttribute('data-audio-src');
-                
-                // 简单的提示：防止由于尚未配置路径而报错
-                if (audioSrc.includes('.mp3') && audioSrc.startsWith('audio')) {
-                    alert('稍等一下，还没准备好音频文件，你先看看别的');
+                const progressBar = this.nextElementSibling;
+
+                // 判断是否点击了当前加载完成的音频按钮
+                if (currentAudio && currentBtn === this) {
+                    if (!currentAudio.paused) {
+                        // 正在播放，点击则暂停
+                        currentAudio.pause();
+                        this.classList.remove('bg-indigo-600', 'text-white');
+                        this.classList.add('bg-indigo-50', 'text-indigo-600');
+                    } else {
+                        // 处于暂停状态，点击则恢复播放
+                        const playPromise = currentAudio.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                this.classList.remove('bg-indigo-50', 'text-indigo-600');
+                                this.classList.add('bg-indigo-600', 'text-white');
+                            }).catch(error => {
+                                alert("音频文件未找到，请刷新或联系管理员");
+                                resetAudioState();
+                            });
+                        }
+                    }
                     return;
                 }
 
-                // 如果点击的是当前正在播放的音频，则暂停
-                if (currentAudio && currentBtn === this && !currentAudio.paused) {
-                    currentAudio.pause();
-                    // 恢复按钮样式
-                    this.classList.remove('bg-indigo-600', 'text-white');
-                    this.classList.add('bg-indigo-50', 'text-indigo-600');
-                    return;
-                }
+                // 如果点击了别的歌曲，先停止上一个
+                resetAudioState();
 
-                // 如果有其他音频在播放，先停止它
-                if (currentAudio) {
-                    currentAudio.pause();
-                    if (currentBtn) {
-                        currentBtn.classList.remove('bg-indigo-600', 'text-white');
-                        currentBtn.classList.add('bg-indigo-50', 'text-indigo-600');
+                // 初始化新音频
+                currentAudio = new Audio(audioSrc);
+                currentBtn = this;
+                currentProgressBar = progressBar;
+
+                // 尝试播放 (基于 Promise 捕获异常，如果文件 404 或无权限播放则报错)
+                const playPromise = currentAudio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // 播放成功触发高亮与显示进度条
+                        currentBtn.classList.remove('bg-indigo-50', 'text-indigo-600');
+                        currentBtn.classList.add('bg-indigo-600', 'text-white');
+                        currentProgressBar.classList.remove('hidden');
+
+                        // 关联进度条时间更新机制
+                        currentAudio.addEventListener('timeupdate', () => {
+                            if (!currentProgressBar.isDragging) {
+                                const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+                                currentProgressBar.value = progress || 0;
+                            }
+                        });
+
+                        // 播放完毕自动复原
+                        currentAudio.onended = () => {
+                            resetAudioState();
+                        };
+                    }).catch(error => {
+                        // 捕捉不到文件或其他异常错误
+                        console.error("Playback error:", error);
+                        alert("文件未找到");
+                        resetAudioState();
+                    });
+                }
+            });
+        });
+
+        // 绑定所有进度条控件的拖动修改进度事件
+        document.querySelectorAll('.audio-progress').forEach(slider => {
+            // 防止拖动时由于 timeupdate 被系统拉回
+            slider.addEventListener('mousedown', () => slider.isDragging = true);
+            slider.addEventListener('touchstart', () => slider.isDragging = true);
+            
+            slider.addEventListener('input', (e) => {
+                if (currentAudio && currentProgressBar === slider) {
+                    const newTime = (e.target.value / 100) * currentAudio.duration;
+                    if (!isNaN(newTime)) {
+                        currentAudio.currentTime = newTime;
                     }
                 }
-
-                // 播放新的音频
-                currentAudio = new Audio(audioSrc);
-                currentAudio.play();
-                currentBtn = this;
-
-                // 播放时改变当前按钮样式（高亮显示正在播放）
-                this.classList.remove('bg-indigo-50', 'text-indigo-600');
-                this.classList.add('bg-indigo-600', 'text-white');
-
-                // 播放结束自动恢复按钮样式
-                currentAudio.onended = () => {
-                    this.classList.remove('bg-indigo-600', 'text-white');
-                    this.classList.add('bg-indigo-50', 'text-indigo-600');
-                };
             });
+
+            slider.addEventListener('mouseup', () => slider.isDragging = false);
+            slider.addEventListener('touchend', () => slider.isDragging = false);
         });
     </script>
 </body>
