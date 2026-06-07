@@ -559,7 +559,7 @@
                                 this.classList.remove('bg-indigo-50', 'text-indigo-600');
                                 this.classList.add('bg-indigo-600', 'text-white');
                             }).catch(error => {
-                                alert("音频文件未找到，请刷新或联系管理员");
+                                alert("音频文件未找到，请刷新或联系管理员，或者直接问任乔洛怎么回事");
                                 resetAudioState();
                             });
                         }
@@ -599,7 +599,7 @@
                     }).catch(error => {
                         // 捕捉不到文件或其他异常错误
                         console.error("Playback error:", error);
-                        alert("音频文件未找到，请刷新或联系管理员");
+                        alert("音频文件未找到，请刷新或联系管理员，或者直接问任乔洛怎么回事");
                         resetAudioState();
                     });
                 }
